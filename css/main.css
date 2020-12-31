@@ -1,0 +1,20 @@
+nav{
+	background-color: #3041D9;
+	box-shadow: 5px 5px 10px rgba(37,37,37,.5);
+}
+
+body{
+	background-color: #3041D9;
+}
+
+.font-light{
+	color:white;
+}
+
+.text-medium{
+	font-size: 20px;
+}
+.ligh-big-i{
+	color: white;
+	font-size: 70px;
+}
