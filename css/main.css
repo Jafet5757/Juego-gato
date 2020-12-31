@@ -4,8 +4,7 @@ nav{
 }
 
 body{
-	background-color: #3041D9;
-}
+	background: linear-gradient(to right, #3041D9 60%, #5343DB);}
 
 .font-light{
 	color:white;
