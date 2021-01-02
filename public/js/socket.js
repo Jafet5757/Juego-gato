@@ -38,7 +38,10 @@ function sendMyData(){
 }
 
 function exit(){
-    socket.emit('room:leave', room);
+    socket.emit('room:leave', {
+        room:room,
+        username:username
+    });
     localStorage.clear();
     location.href = '/start';
 }
@@ -56,8 +59,14 @@ function cambiaTurno(casilla){
         });
         comprobarGanacion('X');
         console.log('opcion enviada');
-    }else{
+    }else if(enEspera){
+        let chat = document.getElementById('chat');
+        chat.insertAdjacentHTML('beforeend', `<p class="black-medium">
+        <strong>System</strong>: No es su turno
+        </p>`);
         console.log('no entró')
+    }else{
+        console.log('casilla ocupada');
     }
 }
 
@@ -141,3 +150,45 @@ function limpiarTablero(){
     }
 }
 
+//messages
+function onKeyUp(event) {
+    var keycode = event.keyCode;
+    if(keycode == '13'){
+      let message = document.getElementById('message').value;
+      socket.emit('chat:message',{
+          room:room,
+          message:message,
+          username:username
+      });
+      document.getElementById('message').value = '';
+    }
+  }
+/*
+<!-- beforebegin -->
+<p>
+  <!-- afterbegin -->
+  foo
+  <!-- beforeend -->
+</p>
+<!-- afterend -->*/
+socket.on('chat:message',function(data){
+    let chat = document.getElementById('chat');
+    chat.insertAdjacentHTML('beforeend', `<p class="black-medium">
+    <strong>${data.username}</strong>: ${data.message}
+    </p>`);
+    document.getElementById('typing').innerHTML = '';
+});
+
+document.getElementById('message').addEventListener('keypress',function (){
+    socket.emit('chat:typing', {
+        room:room,
+        username:username
+    });
+    document.getElementById('typing').innerHTML = '';
+});
+
+socket.on('chat:typing',function(data){
+    document.getElementById('typing').innerHTML = `<p>
+    <em>${data} is typing</em>
+    </p>`;
+});

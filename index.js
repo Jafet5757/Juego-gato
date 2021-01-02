@@ -37,12 +37,17 @@ io.on('connection',(socket)=>{
         console.log('Se creó una nueva sala llamada '+data.room);
     });
 
-    socket.on('room:leave',(oldRoom)=>{
-        socket.leave(oldRoom);
+    socket.on('room:leave',(data)=>{
+        socket.broadcast.to(data.room).emit('chat:message',{username:data.username, message:'Ha salido del juego! ->'});
+        socket.leave(data.room);
     });
 
     socket.on('chat:message',(data)=>{
         io.sockets.in(data.room).emit('chat:message',data);
+    });
+
+    socket.on('chat:typing',(data)=>{
+        socket.broadcast.to(data.room).emit('chat:typing',data.username);
     });
 
     socket.on('game:position',(data)=>{
