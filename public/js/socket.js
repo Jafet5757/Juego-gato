@@ -5,6 +5,7 @@ const createRoom = localStorage.getItem('createRoom');
 let casillasBloqueadas = [];
 let enEspera=false;
 let players = [];
+let turno = document.getElementById('turno');
 
 //mostramos algunos datos importantes
 players.push(username);
@@ -58,6 +59,9 @@ function cambiaTurno(casilla){
             room:room
         });
         comprobarGanacion('X');
+        socket.emit('game:turn',{
+            room:room
+        });
         console.log('opcion enviada');
     }else if(enEspera){
         let chat = document.getElementById('chat');
@@ -149,6 +153,18 @@ function limpiarTablero(){
         document.getElementById(c).value = ' ';
     }
 }
+
+socket.on('game:turn',function(data){
+    socket.emit('game:name',{
+        username:username,
+        room:room
+    });
+    turno.value = username;
+});
+
+socket.on('game:name',function(data){
+    document.getElementById('turno').value = data;
+});
 
 //messages
 function onKeyUp(event) {

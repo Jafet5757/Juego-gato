@@ -33,8 +33,12 @@
                 <div class="card">
                     <div id="chat"></div>
                     <div id="typing" style="color: #5B5B5B;"></div>
-                    <input type="text" id="message" class="form-control" onkeyup="onKeyUp(event)" placeholder="Message">
-                    <i class="fas fa-paper-plane" style="color: black;"></i>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text"><i class="fas fa-paper-plane" style="color: black;"></i></div>
+                        </div>
+                        <input type="text" class="form-control" id="message" placeholder="Message" onkeyup="onKeyUp(event)">
+                      </div>               
                 </div>
             </div>
         </div>

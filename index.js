@@ -61,4 +61,12 @@ io.on('connection',(socket)=>{
     socket.on('game:lose',(data)=>{
         socket.broadcast.to(data.room).emit('game:lose',data);
     });
+
+    socket.on('game:turn',(data)=>{
+        socket.broadcast.to(data.room).emit('game:turn',data);
+    });
+
+    socket.on('game:name',(data)=>{
+        socket.broadcast.to(data.room).emit('game:name',data.username);
+    });
 });
