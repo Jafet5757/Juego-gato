@@ -1,0 +1,42 @@
+<%- include('partials/_header'); %>
+<body style="color: white;">
+
+    <!-- CSS personalizado-->
+    <link rel="stylesheet" type="text/css" href="/public/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/gato.css">
+    <%- include('partials/_navbar'); %>
+
+    <div class="container mt-5 pt-3">
+        <div class="row">
+            <div class="col">
+                <p class="text-medium">Nombre de la sala: <input type="button" readonly class="btn btn-clear-medium" id="roomName" value=""></p>
+                <p class="text-medium">Jugadores: <input type="button" readonly id="playersName" class="btn btn-clear-medium" value=""></p>
+                <p class="text-medium">Turno: <input type="button" readonly class="btn btn-clear-medium" id="turno" value=""></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div align="center">
+                    <input type="button" class="casilla c1" value=" " id="c1" onclick="cambiaTurno('c1')">
+                    <input type="button" class="casilla c2" value=" " id="c2" onclick="cambiaTurno('c2')">
+                    <input type="button" class="casilla c3" value=" " id="c3" onclick="cambiaTurno('c3')"><br>
+                    <input type="button" class="casilla c4" value=" " id="c4" onclick="cambiaTurno('c4')">
+                    <input type="button" class="casilla c5" value=" " id="c5" onclick="cambiaTurno('c5')">
+                    <input type="button" class="casilla c6" value=" " id="c6" onclick="cambiaTurno('c6')"><br>
+                    <input type="button" class="casilla c7" value=" " id="c7" onclick="cambiaTurno('c7')">
+                    <input type="button" class="casilla c8" value=" " id="c8" onclick="cambiaTurno('c8')">
+                    <input type="button" class="casilla c9" value=" " id="c9" onclick="cambiaTurno('c9')"><br>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col">
+                <input type="button" class="btn btn-danger" onclick="exit()" value="Salir del juego" id="exit">
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/public/js/socket.js"></script>
+</body>
+<%- include('partials/_footer'); %>
