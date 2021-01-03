@@ -8,6 +8,12 @@ function getName(){
     return localStorage.getItem('name');
 }
 
+function searchRoom(){
+    localStorage.setItem('room','null');
+    localStorage.setItem('createRoom',false);
+    setName();
+}
+
 function loadNewForm(){
     $('#personal').html(`
 

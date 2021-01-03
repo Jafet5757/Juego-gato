@@ -1,6 +1,6 @@
 const socket = io();
 const username = localStorage.getItem('name');
-const room = localStorage.getItem('room');
+let room = localStorage.getItem('room');
 const createRoom = localStorage.getItem('createRoom');
 let casillasBloqueadas = [];
 let enEspera=false;
@@ -12,9 +12,10 @@ players.push(username);
 showData();
 
 //esta es la condicion basica para todo
-if(createRoom){
+if(createRoom=='true'){
     socket.emit('room:new',{
-        room: room
+        room: room,
+        username:username
     });
     socket.emit('chat:message',{
         message:username+' Listo!',
@@ -26,6 +27,9 @@ if(createRoom){
     });
     
 }else{
+    socket.emit('room:created',{
+        username:username
+    });
     console.log(createRoom);
 }
 
@@ -37,6 +41,20 @@ function sendMyData(){
         room:room
     });
 }
+
+socket.on('room:disponible',function(data){
+      if(data.username==username){
+          alert('No se encontro partida para usted');
+          localStorage.clear();
+          location.href = '/start';
+      }  
+});
+
+socket.on('room:name',function(data){
+    room = data;
+    document.getElementById('roomName').value = room;
+    console.log('sala colocada')
+});
 
 function exit(){
     socket.emit('room:leave', {
@@ -88,6 +106,17 @@ socket.on('room:userData',function(data){
     showData();
     if(!c>1)sendMyData();
     c++;
+});
+
+socket.on('room:userDelete',function(data){
+    console.log('Recibe eliminacion')
+    if(data==username){
+        console.log('Usted es eliminado');
+        alert('La sala esta llena');
+        exit();
+    }else{
+        console.log('Usted permanece en la sala')
+    }
 });
 
 socket.on('game:lose',function(data){
