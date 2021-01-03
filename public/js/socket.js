@@ -160,7 +160,10 @@ function comprobarGanacion(val){
 			{
                 win();
                 console.log('ganacion')
-			}
+            }
+            if((c1=='X' || c1=='O') && (c2=='X' || c2=='O') && (c3=='X' || c3=='O') && (c4=='X' || c4=='O') && (c5=='X' || c5=='O') && (c6=='X' || c6=='O') && (c7=='X' || c7=='O') && (c8=='X' || c8=='O') && (c9=='X' || c9=='O')){
+                empate();
+            }
 }
 
 function win(){
@@ -173,6 +176,15 @@ function win(){
         room:room
     });
     limpiarTablero();
+}
+function empate(){
+    Swal.fire({
+        title:"Ha empatado!",
+        icon: 'warning'
+    });
+    socket.emit('game:tie',{
+        room:room
+    })
 }
 function lose(){
     Swal.fire({
