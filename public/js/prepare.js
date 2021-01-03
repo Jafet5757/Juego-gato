@@ -18,6 +18,9 @@ function loadNewForm(){
     $('#personal').html(`
 
     <div class="mt-5">
+        <div class="alert alert-warning" role="alert">
+            Si la sala ya existe ingresera de manera automatica
+        </div>
         <p class="text-medium">Ingrese el nombre de la sala (sin espacios)</p>
         <input type="text" class="form-control" id="room" placeholder="Room name">
         <br><br>

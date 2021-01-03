@@ -185,6 +185,7 @@ function empate(){
     socket.emit('game:tie',{
         room:room
     })
+    limpiarTablero();
 }
 function lose(){
     Swal.fire({
@@ -207,6 +208,14 @@ socket.on('game:turn',function(data){
         room:room
     });
     turno.value = username;
+});
+
+socket.on('game:tie',function(data){
+    Swal.fire({
+        title:"Ha empatado!",
+        icon: 'warning'
+    });
+    limpiarTablero();
 });
 
 socket.on('game:name',function(data){

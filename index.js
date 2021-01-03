@@ -95,6 +95,10 @@ io.on('connection',(socket)=>{
     socket.on('game:name',(data)=>{
         socket.broadcast.to(data.room).emit('game:name',data.username);
     });
+
+    socket.on('game:tie',(data)=>{
+        socket.broadcast.to(data.room).emit('game:tie',data.username);
+    });
 });
 
 //funciones de la bd
