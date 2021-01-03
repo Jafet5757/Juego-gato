@@ -54,6 +54,11 @@ socket.on('room:name',function(data){
     room = data;
     document.getElementById('roomName').value = room;
     console.log('sala colocada')
+    socket.emit('chat:message',{
+        message:username+' Listo!',
+        room:room,
+        username:username
+    });
 });
 
 function exit(){
@@ -177,6 +182,7 @@ function lose(){
     limpiarTablero();
 }
 function limpiarTablero(){
+    casillasBloqueadas = [];
     for(var i = 0; i<9; i++){
         let c = 'c'+(i+1);
         document.getElementById(c).value = ' ';
