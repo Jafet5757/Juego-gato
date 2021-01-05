@@ -8,9 +8,17 @@
 
     <div class="container mt-5 pt-3">
         <div class="row">
+            <!-- Alert-->
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Debe esperar</strong> a que se una otro jugador para comenzara a jugar (se le mostrará en el chat cuando eso pasé).
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+        <div class="row">
             <div class="col">
                 <p class="text-medium">Nombre de la sala: <input type="button" readonly class="btn btn-clear-medium" id="roomName" value=""></p>
-                <p class="text-medium">Jugadores: <input type="button" readonly id="playersName" class="btn btn-clear-medium" value=""></p>
                 <p class="text-medium">Turno: <input type="button" readonly class="btn btn-clear-medium" id="turno" value=""></p>
             </div>
         </div>
@@ -31,7 +39,7 @@
             <div class="col-md">
                 <div class="card"><center><p class="black-medium">Chat</p></center></div>
                 <div class="card">
-                    <div id="chat"></div>
+                    <div id="chat" style="overflow: auto; max-height: 300px;"></div>
                     <div id="typing" style="color: #5B5B5B;"></div>
                     <div class="input-group mb-2">
                         <div class="input-group-prepend">
@@ -51,5 +59,11 @@
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="/public/js/socket.js"></script>
+    <script>
+        window.location.hash="no-back-button";
+        window.location.hash="Again-No-back-button";
+        window.onhashchange=function(){window.location.hash="no-back-button";}
+        window.location.reload = function(){alert('refresh')}
+    </script>
 </body>
 <%- include('partials/_footer'); %>

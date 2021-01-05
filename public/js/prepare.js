@@ -22,7 +22,7 @@ function loadNewForm(){
             Si la sala ya existe ingresera de manera automatica
         </div>
         <p class="text-medium">Ingrese el nombre de la sala (sin espacios)</p>
-        <input type="text" class="form-control" id="room" placeholder="Room name">
+        <input type="text" autocomplete="off" class="form-control" id="room" placeholder="Room name">
         <br><br>
         <input type="button" class="btn btn-danger" onclick="createRoom()" value="Entrar">
     </div>

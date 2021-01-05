@@ -25,21 +25,15 @@ if(createRoom=='true'){
     socket.on('chat:message', function(data){
         console.log(data);
     });
-    
-}else{
+    localStorage.setItem('createRoom','null');
+}else if(createRoom=='false'){
     socket.emit('room:created',{
         username:username
     });
     console.log(createRoom);
-}
-
-sendMyData();
-
-function sendMyData(){
-    socket.emit('room:userData',{
-        username:username,
-        room:room
-    });
+    localStorage.setItem('createRoom','null');
+}else{
+    exit();
 }
 
 socket.on('room:disponible',function(data){
@@ -130,7 +124,6 @@ socket.on('game:lose',function(data){
 
 function showData(){
     document.getElementById('roomName').value = room;
-    document.getElementById('playersName').value = players;
 }
 
 function comprobarGanacion(val){
